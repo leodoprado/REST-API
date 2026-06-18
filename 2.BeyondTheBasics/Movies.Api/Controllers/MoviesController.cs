@@ -2,6 +2,7 @@
 using Movies.Api.Mapping;
 using Movies.Application.Models;
 using Movies.Application.Repositories;
+using Movies.Application.Services;
 using Movies.Contracts.Requests;
 
 namespace Movies.Api.Controllers;
@@ -9,9 +10,9 @@ namespace Movies.Api.Controllers;
 [ApiController]
 public class MoviesController : ControllerBase
 {
-    private readonly IMovieRepository _movieRepository;
+    private readonly IMovieService _movieRepository;
     
-    public MoviesController(IMovieRepository movieRepository)
+    public MoviesController(IMovieService movieRepository)
     {
         _movieRepository = movieRepository;
     }
@@ -57,11 +58,11 @@ public class MoviesController : ControllerBase
         [FromBody] UpdateMovieRequest request)
     {
         var movie = request.MapToMovie(id);
-        var updated = await _movieRepository.UpdateAsync(movie);
+        var updatedMovie = await _movieRepository.UpdateAsync(movie);
         
-        if (!updated) return NotFound();
+        if (updatedMovie is null) return NotFound();
 
-        var response = movie.MapToResponse();
+        var response = updatedMovie.MapToResponse();
         return Ok(response);
     }
 
