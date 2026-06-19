@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <PackageReference Include="Dapper" Version="2.1.79" />
+      <PackageReference Include="FluentValidation" Version="11.11.0" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="11.0.0-preview.5.26302.115" />
       <PackageReference Include="Npgsql" Version="9.0.3" />
     </ItemGroup>
